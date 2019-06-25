@@ -23,7 +23,7 @@ class Game:
         self.p1 = p1
         self.p2 = p2
 
-    def play_round():
+    def play_round(self):
         move1 = self.p1.move(PlayerA)
         move2 = self.p2.move(PlayerB)
         print(f"Player 1: {move1}) Player 2: {move2}")
@@ -38,5 +38,5 @@ class Game:
         print("Game over!")
 
 if __name__ == "__main__":
-    game = Game(Player(), Player())
+    game = Game(RandomPlayer(), RandomPlayer())
     game.play_game()
