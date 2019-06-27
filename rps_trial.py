@@ -12,6 +12,10 @@ class RandomPlayer(Player):
     def move(self):
         return random.choice(moves)
 
+class HumanPlayer(Player):
+    def move(self):
+        return input("Rock, paper, scissors? > ")
+
 
 def beats(one, two):
     return((one == "rock" and two == "scissors") or (one == "scissors" and two == "paper") or
@@ -44,7 +48,7 @@ class Game:
             print(f"Score: Player 1 {self.p1.score}, Player 2 {self.p2.score}")
 
     def play_game(self):
-        print("Game start!")
+        print("Rock Paper Scissors, Let's go!")
         for round in range(3):
             print(f"Round {round + 1}:")
             self.play_round()
@@ -53,5 +57,5 @@ class Game:
 
 
 if __name__ == "__main__":
-    game = Game(RandomPlayer(), RandomPlayer())
+    game = Game(HumanPlayer(), RandomPlayer())
     game.play_game()
