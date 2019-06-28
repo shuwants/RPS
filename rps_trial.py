@@ -34,6 +34,7 @@ class HumanPlayer(Player):
         return ask_input()
 
 
+
 def beats(one, two):
     return((one == "rock" and two == "scissors") or (one == "scissors" and two == "paper") or
     (one == "paper" and two == "rock"))
