@@ -78,6 +78,9 @@ def beats(one, two):
            or (one == "paper" and two == "rock"))
 
 
+players = [RandomPlayer(), ReflectPlayer(), CyclePlayer()]
+
+
 class Game:
     def __init__(self, p1, p2):
         self.p1 = p1
@@ -126,5 +129,5 @@ class Game:
 
 
 if __name__ == "__main__":
-    game = Game(HumanPlayer(), CyclePlayer())
+    game = Game(HumanPlayer(), random.choice(players))
     game.play_game()
