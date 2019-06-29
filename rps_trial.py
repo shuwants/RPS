@@ -34,6 +34,19 @@ class HumanPlayer(Player):
         return ask_input()
 
 
+class ReflectPlayer(Player):
+    def __init__(self):
+        super().__init__()
+        self.their_move = None
+
+    def move(self):
+        if self.their_move is None:
+            choice = RandomPlayer.move(self)
+            self.learn(self, choice)
+            return choice
+        return self.their_move
+
+
 
 def beats(one, two):
     return((one == "rock" and two == "scissors") or (one == "scissors" and two == "paper") or
@@ -46,7 +59,6 @@ class Game:
         self.p2 = p2
         self.p1.score = 0
         self.p2.score = 0
-        self.ties = 0
 
     def play_round(self):
         move1 = self.p1.move()
@@ -73,15 +85,16 @@ class Game:
             self.play_round()
         print(f"Final Score: Player One {self.p1.score}, Player Two {self.p2.score}")
         if self.p1.score > self.p2.score:
-            print("Player One win! Congratulations!")
+            print("Player One win! Congratulations!\nGame Over!")
         elif self.p2.score > self.p1.score:
-            print("Player Two win! Congratulations!")
+            print("Player Two win! Congratulations!\nGame Over!")
         else:
-            print("Wao! It's TIE! Let's play 5 more games to get settled!")
-            game.play_game()
+            print("Wao! It's TIE! Let's play 5 more games to settle things down!")
+            self.p1.score = 0
+            self.p2.score = 0
 
-        print("Game over!")
+            self.play_game()
 
 if __name__ == "__main__":
-    game = Game(HumanPlayer(), RandomPlayer())
+    game = Game(HumanPlayer(), ReflectPlayer())
     game.play_game()
